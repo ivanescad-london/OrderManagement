@@ -16,7 +16,7 @@ namespace OrderSystem.Data
                    new Client { Name = "Client A" },
                    new Client { Name = "Client B" },
                    new Client { Name = "Client C" },
-                   new Client { Name = "Client C" }
+                   new Client { Name = "Client D" }
                };
 
             // Suppliers
