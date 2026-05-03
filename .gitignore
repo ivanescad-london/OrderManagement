@@ -3,10 +3,6 @@
 ################################################################################
 
 /OrderSystem/.vs/OrderSystem
-/OrderSystem/obj/Debug/net9.0
 /OrderSystem/bin/Debug/net9.0
-/OrderSystem/obj/project.nuget.cache
-/.vs/Orders.slnx
-/.vs/ProjectEvaluation
+/.vs
 /OrderSystem/obj
-/.vs/Orders/CopilotIndices/17.14.1641.39856

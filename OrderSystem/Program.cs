@@ -10,7 +10,9 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
    options.UseSqlServer(
-       builder.Configuration.GetConnectionString("DefaultConnection")));
+   builder.Configuration.GetConnectionString("DefaultConnection"),
+   sql => sql.EnableRetryOnFailure()
+));
 
 // .NET 9 built-in OpenAPI generator
 builder.Services.AddOpenApi();
@@ -25,15 +27,24 @@ builder.Services.AddScoped<IGoodsService, GoodsService>();
 
 var app = builder.Build();
 
+// Generates OpenAPI document
+app.MapOpenApi();
+	
 if (app.Environment.IsDevelopment())
 {
-    // Generates OpenAPI document
-    app.MapOpenApi();
-
     // Swagger visual UI
     app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint("/openapi/v1.json", "OrderSystem API v1");
+        options.SwaggerEndpoint("/openapi/v1.json", "OrderSystem API v1 (Development)");
+        options.RoutePrefix = "swagger"; // URL path
+    });
+}
+else // in Production
+{
+    // Swagger visual UI
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "OrderSystem API v1 (Production)");
         options.RoutePrefix = "swagger"; // URL path
     });
 }
